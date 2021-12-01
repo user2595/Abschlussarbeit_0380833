@@ -1,0 +1,219 @@
+\chapter{ Delaunay-Refinement }\label{kap:Algorithmus} Da der Schwerpunkt dieser Arbeit auf dem Terminierungsbeweis des intrinsischen Delaunay-Refinement liegt, wird im Folgenden das Delaunay-Refinement vorgestellt und eine intuitive Beweisidee geliefert. Die Ausführungen beruhen dabei auf den Überlegungen von \citet{shewchuk:1997:delaunay,SHEWCHUK:2002:chuws}.\\
+Delaunay-Refinement Algorithmen basieren auf Delaunay-Triangulierung, die so lange durch das Einfügen neuer Knoten optimiert werden, bis die Triangulierung die vorher definierten Anforderungen an Winkel- und Flächengröße erfüllt. In diesem Kapitel wird davon ausgegangen, dass der Leser mit Delaunay-Triangulierungen vertraut ist; für weiter Informationen siehe Lee, Lin \cite{lee:1986:DelaunayTriangulation} und \citet{chew:1993:guaranteed}. 
+
+
+\section*{Beschreibung des Algorithmus}
+%Zu den bekanntesten Delaunay-Refinement-Methoden gehören die Algorithmen von \citet{chew:1993:guaranteed,chew1989guaranteed} und der von Ruppert \cite{ruppert:1995:delaunay}. Da die Triangulierung einer geschlossenen StF-Oberfläche in der Regel keine Segmente enthält, sparen wir uns die Behandlung von Segmenten. Mehr Information zum Umgang siehe \cite{SHEWCHUK:2002:chuws}.\\
+
+Delaunay-Refinement-Algorithmen bestehen üblicherweise aus zwei Schritten: das Einfügen eines neuen Knotens und die Wiederherstellung der Delaunay-Eigenschaft.
+Diese Schritte  werden so lange wiederholt, bis die Triangulierung die vorher definierten Anforderungen erfüllt.\\ 
+   %Delaunay-Refinement-Algorithmen, die als Eingabe keine Delaunay Triangulierung bekommen, haben für gewöhnlich noch den zusätzlichen Schritt die Eingabe zu Triangulieren und ggf. die Delaunay Eigenschaft herzustellen.  
+%   Der Algorithmus von \citet{chew:1993:guaranteed} wird hier mit einigen Änderungen gegenüber dem ursprünglichen Algorithmus vorgestellt. Die wichtige Änderung ist, dass der Algorithmus als Eingabe: Triangulierungen von geschlossenen StF-Oberfläche hat.
+  
+%   Die Triangulierung einer geschlossenen StF-Oberfläche enthält in der Regel keine Segmente.
+%   dadurch, benötigen wir auch keine eingeschränkte Delaunay Triangulierung und sparen uns die Behandlung von Segmenten.
+  % Die  Delaunay-Triangulierung kann nur eine feste Knotenmenge optimal zu einem Dreiecksnetz verbinden. Möchte man darüber hin die Qualität der Triangulierung, die Innenwinkel oder Flächenaufteilung der einzelnen Dreiecke verbessern, kann dies über das gezielt einfügen weiter Knoten  geschehen.
+% Aufgrund ihrer nützlichen Eigenschaften ist die  Delaunay-Triangulierungen $M^D$ eine, der in der Praxis am häufigsten eingesetzten Triangulierungen. die Eigenschaften sind z.b. die Dualität zum Voronoi Diagramm, dass eine Kante, genau dann Teil der Triangulierung ist  wenn sie eine leere Kreisscheibe Besitz, Sodas nur die Endknoten der Kante auf den Rand der Scheibe liegen und die Maximierung des minimalen Innenwinkels über alle Dreiecke. Letztere Eigenschaft verhindert in weiterer Folge
+% \begin{definition}(Umkreisradius-zu-kürzester-Kante Verhältnisses).\\
+% \label{def:UrzkK}
+% Das Umkreisradius-zu-kürzester-Kante-Verhältnis im Folgenden \UrzkK ist eine Metrik zur Bewertung von Dreiecksqualität. Die Metrik beschreibt, die Beziehung $\frac{\kuezesteKante*}{2 \umkreisradius*}$  zwischen dem Umkreisradius \umkreisradius eines Dreiecks und der Länge seiner kürzesten Kante \kuezesteKante.\\
+% Das Verältniss kann dabei von Delaunay-Refinement Algorithmen  nur verkleinert werden \cite{MiTaTeWa1995ACM}. In [TODO-Kapitel-Referenz] zeigen wir, dass es für Intrinsischen Delaunay Refinement eine natürliche Untergrenze für \UrzkK gibt.\\
+% \end{definition}
+
+
+ \begin{figure}[h]
+    \centering
+    \includegraphics[width=5in]{images/delaunay_refinement.png}
+    \caption{Illustration einer Iteration des Delaunay-Refinement: ein dünnes Dreieck $t$ wird geteilt, indem sein Umkreismittelpunkt $v$ eingefügt wird und die Delaunay Eigenschaft der Triangulierung wiederhergestellt wird. \cite{SHEWCHUK:2002:chuws} }
+    \label{fig:Punkt_einfügen}
+\end{figure}
+
+
+
+Die Anforderung an die Eingabe ist für gewöhnlich,
+dass alle Innenwinkel der Dreiecke größer als ein Winkel-Schwellenwert \kleinsterWinkel sind.
+In Kapitel \ref{kap:Terminierung} zeigen wir, dass der Algorithmus für ein $\kleinsterWinkel* \leq \frac{\pi}{6} $  terminiert.\\
+Im Kontext von Delaunay-Refinement werden in der Literatur  Dreiecke als dünn bezeichnet, die die vorher definierten Anforderungen nicht erfüllen \cite{shewchuk:1997:delaunay}. 
+Dünne Dreiecke sind z. B. Dreiecke mit mindestens einem Innenwinkel kleiner als \kleinsterWinkel. 
+
+\subsection*{Intrinsischer Delaunay-Refinement Algorithmus}
+\textbf{Eingabe:}
+Ein Winkel-Schwellenwert \kleinsterWinkel und eine Triangulierung einer StF-Oberfläche, die verfeinert werden soll.  \\
+
+\textbf{Ausgabe:}
+Eine intrinsische Delaunay-Refinement derselben StF-Oberfläche, die mit der Geometrie der Eingabe übereinstimmt und keine dünnen Dreiecke mehr enthält.\\
+
+\begin{algorithm}[H]
+\label{alg:1}
+\SetAlgoLined
+\KwData{Triangulierung einer StF-Oberfläche $M$; Winkel-Schwellenwert \kleinsterWinkel }
+\KwResult{Intrinsische Delaunay-Refinement  $M^\prime $ }
+  WiederherstellenDerDelaunayEigenschaft($M$)\;
+ $T_{bad} \gets  \{t_{bad} \in M | t_{bad}  \text{ ist ein dünnes Dreieck}\}$ \;
+ \While{$T_{bad} \neq \emptyset$}{
+    $t_{bad} \gets T_{bad}$.pop \;
+    %$u \gets $Umkreismittelpunkt($t_{bad}$)\;
+    EinfügenNeuerKnotens($t_{bad}$, $M$)\;
+    %EinfügenEinesNeuenKnotens($t_{bad}$.umkreismittelpunkt, $M$)\;
+  WiederherstellungDelaunay-Eigenschaft($M$)\;
+  Aktuallisiere($ T_{bad}  $)\;
+ }
+ \caption{\algorithmusname}
+\end{algorithm}
+
+
+\subsection*{Einfügen neuer Knoten}
+Im Allgemeinen liegt der neu einzufügende Knoten $p$ innerhalb der Fläche eines beliebigen Dreiecks  $t$  von $M$, mit $i,j,k \in t$. Dann wird nach dem Einfügen von $p$ in $M$ $t$ aus $M$ entfernt und die Dreiecke $t_{i,j,p}, t_{i,k,p}$ und $t_{k,j,p}$ werden  in $M$ eingefügt. 
+Für den Fall, dass $p$ auf einer Kante $e$ liegen, wird derselbe Prozesse auf den beiden angrenzenden Dreiecke ausgeführt (siehe \ref{fig:Punkt_einfügen}).  
+
+ \begin{figure}[h]
+    \centering
+    \includegraphics[width=3in]{images/Punkt_einfügen_2}
+    \caption{Illustration des Punkteinfügens\cite{Sharp:2019:NIT} }%\cite{shewchuk:1997:delaunay}}
+    \label{fig:Punkt_einfügen}
+\end{figure}
+ 
+ 
+Der Einfachheit halber wird das Einfügen eines Knotens in den Umkreisradius eines Dreiecks im Folgenden als Teilung eines Dreiecks  bezeichnet \cite[zitiert nach \cite{shewchuk:1997:delaunay}]{Frey:1987:Umkreismittelpunkt}.
+ 
+
+Hierbei ist es wichtig, dass der neu eingefügte Knoten möglichst weit entfernt von anderen Knoten ist. Andernfalls könnten wieder neue kurze Kanten entstehen, was zur Erzeugung neuer dünner Dreiecke führt. 
+Daher wird als neu einzufügender Knoten der Umkreismittelpunkt eines dünnen Dreiecks \cite{ruppert:1995:delaunay, Frey:1987:Umkreismittelpunkt} gewählt, denn in einer Delaunay-Triangulierungenthält definitionsgemäß der Umkreis eines Dreiecks keine anderen Knoten. Zudem haben dünne Dreiecke im Allgemeinen große Umkreisradien. Somit hat der neu eingefügte Knoten von allen anderen Punken garantiert mindestens den Abstand des Umkreisradius des besagten Dreiecks. Das Einfügen eines Knotens in den Umkreis eines Dreiecks garantiert zudem die Löschung des Dreiecks, da sein Umkreis nicht mehr leer ist und es beim Wiederherstellen der Delaunay Eigenschaft verschwindet. 
+Der Algorithmus ist so konzipiert, dass er alle dünnen Dreiecke der Reihe nach teilt, bis es keine mehr gibt. Der Algorithmus terminiert genau dann, wenn es keine dünnen Dreiecke mehr in $M$ gibt. Falls also beim Teilen dünner Dreiecke immer weiter neue dünne Dreiecke entstehen, würde der Algorithmus nicht terminieren.
+
+
+ 
+
+\subsection*{Wiederherstellung Delaunay-Eigenschaft}
+Da die Eingabe im Allgemeinen keine Delaunay-Triangulierung ist, wird zu Beginn die Delaunay Eigenschaft hergestellt.
+Genauso muss nach dem Einfügen eines Knotens die Delaunay-Eigenschaft wiederhergestellt werden. Nach dem Einfügen eines Knotens in den Umkreis eines dünnen Dreiecks ist dieser nicht mehr leer und somit gilt nach Definition, dass das besagte Dreieck nicht mehr Teil der Delaunay-Triangulierung ist. \\
+
+Die Wiederherstellung der Delaunay-Eigenschaft kann mithilfe von einem Kanten-Flip-Algorithmus umgesetzt werden, denn es gilt: Eine beliebige Triangulierung kann mithilfe endlich vieler Kantenflips in eine Delaunay-Triangulierungüberführt werden \citet{shewchuk:1997:delaunay}.
+
+\citeauthor{SHEWCHUK:2002:chuws} empfiehlt dafür z.B. eine Variation von \textit{Lawson’s algorithm} \cite{lawson:1977:lawson-algorithmus}. 
+
+\subsection*{Begrenzungen und Unterschiede verschiedener Delaunay-Refinement Algorithmen}
+Wir betrachten in dieser Arbeit als Eingabe des Intrinsischen Delaunay-Refinement nur  Triangulierungen ohne Rand. Daher liegt der Umkreismittelpunkt eines Dreiecks immer innerhalb der Triangulierung. Deswegen wird in dieser Beschreibung nicht weiter auf den Umgang mit Begrenzungen oder auf die darin liegenden Unterschied der verschieden Delaunay-Refinement Algorithmen eingegangen. In der euklidischen Ebene jedoch ist der Umgang mit Begrenzungen ein großes Problem, denn dort kann der Umkreismittelpunkt eines Dreiecks auch außerhalb der Triangulierung liegen und verschiedene Delaunay-Refinement Algorithmen unterscheiden sich vor allem im Umgang mit Begrenzungen. 
+
+\newpage
+\section*{Intuitive Beweisidee}
+
+In diesem Kapitel wird das Umkreis-zu-kürzesten-Kante-Verhältnis als Werkzeug zur Analyse des Delaunay-Refinement eingeführt. Mit seiner Hilfe wird eine intuitive Erklärung für den Beweis der Terminierung hergeleitet. 
+
+
+
+Bei Dreiecken ist neben dem kleinsten Innenwinkel  $\theta_{min}$  das Verhältnis von Umkreisradius zur kürzesten Kante ein natürliches Maß für die Analyse von DDelaunay-Refinement Algorithmen \cite{MiTaTeWa1995ACM}. $\kappa = \frac{\kuezesteKante*}{ \umkreisradius*}$ bezeichnet die Beziehung zwischen dem Umkreisradius \umkreisradius eines Dreiecks und der Länge seiner kürzesten Kante \kuezesteKante. Die Länge \kuezesteKante ist dabei eine Maß, das durch Delaunay-Refinement Algorithmen automatisch verbessert wird \cite{SHEWCHUK:2002:chuws}. Die Optimierung von $\kappa$ ist dabei äquivalent zur Optimierung von  $\theta_{min}$, denn die beiden Variablen stehen in Relation zueinander:
+\begin{align*}
+ \kappa = 2\sin(\theta_{min}).   
+\end{align*}
+Es gilt demnach: Umso größer $\kappa$, desto größer ist $\theta_{min}$. Wenn es also eine Untergrenze $\kappa_{min}$ von $\kappa$ über alle Dreiecke  gibt, dann gibt es keinen Winkel, der kleiner ist als \begin{align*}
+    \sin^{-1}(\frac{\kappa_{min}}{2 })
+\end{align*} und umgekehrt. 
+
+Ein Dreieck, bei dem $\kappa$ kleiner $\kappa_{min}$ ist, wird demnach ebenfalls als dünn bezeichnet.\\
+
+Anmerkung: Das in dieser Arbeit verwendete Umkreis-zu-kürzeste-Kante-Verhältnis ist dabei  reziprok zu dem  von \citet{SHEWCHUK:2002:chuws} eingeführten Umkreis-zu-kürzeste-Kante-Verhältnis.\\ 
+
+
+Der Algorithmus verwendet eine Schranke von $\kappa_{min} = 1 $ 
+, er teilt also nur Dreiecke, für die $\umkreisradius* \geq \kuezesteKante*$ gilt. Daher wird kein Knoten eingefügt, der näher an einem anderen Knoten ist als die Länge der kürzesten Kante der Eingabetriangulierung.\\     
+
+Das Delaunay-Refinement muss schließlich terminieren, da die Fläche, auf der neue Knoten hinzugefügt werden können, begrenzt ist und ein Mindestabstand zu anderen Knoten eingehalten werden muss. Nach der Terminierung haben alle Winkel einen Wert zwischen $\frac{\pi}{6}$ und $\frac{5\pi}{3}$.\\
+
+Durch die Betrachtung der Umkreisradien wird klar, dass alle dünnen Dreiecke im  Delaunay-Refinement geteilt werden.
+Da dünne Dreiecke im Verhältnis große Umkreisradien haben, werden zwangsläufig im Verlauf des Algorithmus Knoten in ihren Umkreis eingefügt. Da in der Ausgabetriangulierung die Abstände der Knoten einigermaßen gleichmäßig sind, können große leere Kreisscheiben ebenfalls nicht an kurze Kanten angrenzen. Dünne Dreiecke können zudem nicht in der Delaunay-Triangulierungverbleiben.\\    
+In einer Triangulierung ohne Rand kann das Delaunay-Refinement alle dünnen Dreiecke teilen, bei denen $\kappa < 1$ bzw. $\theta_{min} < \frac{\pi}{6}$ gilt, ohne dass eine Kante entsteht, die kürzer ist als die bereits vorhandene kürzeste Kante.   
+
+   
+\chapter{Vergleich: Planares und intrinsisches Delaunay-Refinement}
+In diesem Teil vergleichen wir das planare und das intrinsische Delaunay-Refinement und zeigen Probleme auf, die bei der Anwendung auf Triangulierungen von geschlossen Oberflächentriangulierungen entstehen könnten.   
+
+\section*{Einfügen Knoten}
+
+Im Vergleich zu Triangulierungen in der Euklidischen Ebene stellt sich neben der Frage welcher Punkt eingefügt werden soll auch die Frage wo genau auf der StF-Oberfläche sich der Punkt befindet, wenn er nicht innerhalb seines Dreieckes liegt? \\
+
+Aufgrund der Delaunay-Eigenschaft liegen keine Knoten innerhalb des Umkreises eines dünnen Dreiecks. Infolgedessen ist  garantiert, dass alle am Umkreis beteiligten Dreiecke gemeinsam und eindeutig flach in der Euklidischen Ebene aufgefaltet werden können. Somit befindet sich der gesuchte Punkt immer auf der Fläche eines aufgefalteten Dreiecks und kann somit wie in der Ebene verwebt werden. 
+
+
+\citet{Sharp:2019:NIT} schlägt folgendes Vorgehen vor:
+Wenn der Umkreismittelpunkt eines Dreiecks $t$ außerhalb von
+$t$ liegt, dann muss es einen stumpfen Winkel an einem einzigen
+Eckpunkt $a$ geben. Da der Umkreis von $t$ leer ist, kann er
+eindeutig in der Euklidischen Ebene aufgefaltet werden  und es kann ein Vektor $p$ von $a$ zum ebenen Umkreismittelpunkt $u$ konstruieren werden. Dann kann $p$ als geradlinige Geodäte \cite{Polthier:2006:SIGGRAPH} entlang der Oberfläche zu $u$ verfolgt und eingefügt werden.
+
+ \begin{figure}[h]
+    \centering
+    \includegraphics[width=2in]{images/auffaltung_punkteinfuegen.png}
+    \caption{Illustration des Vorgehens von \citeauthor{Sharp:2019:NIT} \cite{Sharp:2019:NIT} }%\cite{shewchuk:1997:delaunay}}
+    \label{fig:Punkt_einfügen}
+\end{figure}
+\section*{Wiederherstellung Delaunay-Eigenschaft}
+Im Allgemeinen erfüllen Triangulierungen von StF-Oberflächen ebenfalls nicht die Delaunay-Eigenschaft. Laut \citet{Bobenko:2007:LaplaceBeltrami} kann die Delaunay-Eigenschaft einer jeden Triangulierung einer StF-Oberfläche durch intrinsische Kanten-Flips erhalten werden.
+Ein mögliches Vorgehen einen intrinsischen Kanten-Flip Algorithmus stellt \citet{Bobenko:2006:SIGGRAPH} vor. Das Schema basiert auf dem intrinsischen LaplaceBeltrami Operator \cite{Bobenko:2007:LaplaceBeltrami}.
+ \begin{figure}[H]
+    \centering
+    \includegraphics[width=5in]{images/intrinische_Kantenflip.png}
+    \caption{Illustration des Intrinsischen Kantenflips: die beteiligten Dreiecke werden erst gemeinsam  aufgefaltet und dann die Kante geflippt.  Das Resultat ist  \textcolor{red}{die neue Kante} und \textcolor{green}{die alte Kante}  \cite{Bobenko:2006:SIGGRAPH}. }%\cite{shewchuk:1997:delaunay}}
+\end{figure}
+Generell gilt: Die vom intrinsischen Kanten Flip Algorithmus erzeugten Delaunay-Triangulierungmüssen nicht zwingend regulär sein, weshalb irreguläre Dreiecke im Folgen gesondert betrachtet werden müssen. 
+ \begin{figure}[H]
+    \centering
+    \includegraphics[width=5in]{images/entstehung_irregulär.png}
+    \caption{Illustration der Erzeugung von irregulären Kanten: Hier wird ein Knoten von Grad drei durch zwei intrinsische Kantenflips zu einem Knoten von Grad eins. Im Resultat sind \textcolor{red}{die neue Kante} und \textcolor{green}{die alte Kante}\cite{Bobenko:2006:SIGGRAPH}. }%\cite{shewchuk:1997:delaunay}}
+\end{figure}
+
+
+
+\section*{Winkeldefekt und irreguläre Triangulierungen}
+Die bei Triangulierungen von StF-Oberflächen erlaubte intrinsische Irregularität bedeutet, dass sie Dreiecke enthalten kann, bei denen zwei Kanten identisch sind oder ein Knoten eine Kante zu sich selbst hat. Das ist ein wesentlicher Unterschied zu Triangulierungen in der euklidischen Ebene. \\
+
+Die bei StF-Oberflächen auftretenden irregulären Kanten (beide Endknoten sind identisch) müssen daher ebenfalls gesondert betrachtet werden, denn für sie gelten die von \citet{ruppert:1995:delaunay} aufgestellten Längenlemmata nicht. Irreguläre Kanten legen sich im Allgemeinen als Schlaufe um ein Loch \citeauthor{erickson:2005:generator}, um einen Bereich mit kurzem Durchmesser oder eine Kegelspitze.\\
+ \begin{figure}[H]
+    \centering
+    \includegraphics[width=2in]{images/irreguläre_schlaufe_loch.jpg}
+    \caption{Illustration einer  irreguläre Kante $e_{v,v}$ die sich als Schlaufe um ein Loch legt }%\cite{shewchuk:1997:delaunay}}
+    \label{fig:Punkt_einfügen}
+\end{figure}
+ 
+
+
+Dass sich irreguläre Kanten als Schlaufe um ein Loch oder Bereich mit kurzen Durchmesser legen, ist für die weitere Betrachtung unproblematisch, denn hier gibt es durch die Geometrie der Eingabe ein festgelegtes Minimum.  \citet{erickson:2005:generator}  schlägt in seiner Arbeit eine Methode vor, wie diese einfach berechnet werden kann.\\
+Dass sich die irreguläre Kante als Schlaufe um eine Kegelspitze legt, ist für die weitere Betrachtung problematischer, denn hier kann sie sich in Richtung Kegelspitze  weiter zuziehen und somit theoretisch immer kleinere irreguläre Kanten erzeugen.
+ \begin{figure}[H]
+    \centering
+    \input{figuren/irraegular_kegel}
+    \caption{Illustration einer  irreguläre Kante $e_{v,v}$ die sich als Schlaufe um die Kegelspitze $s$ legt \cite{erickson:2005:generator}}%\cite{shewchuk:1997:delaunay}}
+    \label{fig:Punkt_einfügen}
+\end{figure}
+ 
+dass sich irreguläre Kanten als Schleife um eine Kegelspitze legen, ist wichtig, damit sich der durch den Winkeldefekt minimierte Gesamtwinkel einer Kegelspitze optimal auf den Innenwinkel eines Dreieckes verteilen kann. Da der Innenwinkel eines Dreiecks maximal $\pi$ groß sein kann, tritt dieses Phänomen nur bei Kegelspitzen mit Gesamtwinkel kleiner gleich $\pi$ auf. Daher werden wir im Folgenden besagte Kegelspitzen näher untersuchen und in Lemma \ref{le:irregulär_entfernung} zeigen, dass Kegelspitzen mit Gesamtwinkel größer $\frac{\pi}{3}$ keine Auswirkungen auf die Terminierung des Algorithmus haben. 
+
+
+
+
+
+
+
+
+\section*{Größte Kreisscheibe und aufgewickelte Kanten}
+Ein weiterer Unterschied ist, dass im zweidimensionalen Fall der größte Umkreisradius  einfach nach oben abgeschätzt werden kann, nämlich durch einen Kreis, der die konvexe Hülle der Triangulierung umschließt. Bei Oberflächen lässt sich diese Obergrenze nicht so leicht finden. Zudem existieren auf einer geschlossenen Oberfläche unendlich viele Möglichkeiten, zwei Knoten zu verbinden. Das hat zur Folge, dass der Algorithmus theoretisch ebenfalls immer längere Kanten erzeugen könnte, wodurch er immer neue dünne Dreiecke generieren und folglich nicht terminieren würde.\\
+ \begin{figure}[H]
+    \centering
+    \includegraphics[width=5in]{images/aufgewickeltes_dreieck.png}
+    \caption{ Illustration von aufgewickelten Kanten: die Kanten zwischen zwei festen Knoten kann theoretisch beliebig länger werden, in dem sie sich immer weiter um die geschlossene Oberfläche wickelt.\cite{Sharp:2019:NIT} }
+    \label{fig:aufgewickeltung}
+\end{figure}
+
+
+Daher ist ebenfalls die Existenz einer möglichen Obergrenze für die Länge des Umkreisradius eines Dreiecks und seiner längsten Kante zu untersuchen. 
+
+In Lemma \ref{le:auffaltung} zeigen wir, dass es eine natürliche Obergrenze des Umkreisradius von neu erzeugten Dreiecken gibt. Somit können auch neu erzeugte Kanten nicht unendlich lang werden, denn die längste Kante eines Dreiecks ist maximal doppelt so lange wie der Umkreisradius (siehe Abb. \ref{fig:langsteKante}).
+ \begin{figure}[H]
+    \centering
+    \input{figuren/umkreis}
+    \caption{ Illustration das $d_{max}(t) \leq 2r(t)$ ist}%\cite{shewchuk:1997:delaunay}}
+    \label{fig:langsteKante}
+\end{figure}
+ 
+
+

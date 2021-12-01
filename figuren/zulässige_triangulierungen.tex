@@ -1,0 +1,131 @@
+\documentclass[12pt, tikz, border=5mm]{standalone}
+\usepackage{tikz}
+\usepackage{amssymb}
+
+\begin{document}
+
+%\usetikzlibrary{fit}
+\usetikzlibrary{arrows}
+\usetikzlibrary{trees}
+
+
+\usetikzlibrary{calc}
+\usetikzlibrary{quotes,angles}
+\begin{tikzpicture}
+  
+
+
+
+\newcommand{\Cross}{$\mathbin{\tikz [x=2.4ex,y=2.4ex,line width=.5ex, red] \draw (0,0) -- (1,1) (0,1) -- (1,0);}$}%
+
+
+\newcommand{\length}{1}
+\newcommand{\startx}{-3}
+\newcommand{\starty}{0}
+\newcommand{\distance}{ 1 }
+
+
+
+\newcommand{\st}{ \startx+ \distance + 2*\length}
+
+\newcommand{\stst}{ \st+ \distance + 2*\length}
+
+\newcommand{\ststst}{ \stst+ \distance + 2*\length}
+\newcommand{\stststst}{ \ststst+ \distance + 2*\length}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\coordinate (A) at (\startx,\starty+\length);
+\coordinate (B) at (\startx+\length,\starty);
+\coordinate (C) at (\startx+\length, \starty+2* \length);
+\coordinate (offset1) at (\length,0);
+
+
+\coordinate (A2) at (\st ,\starty+\length);
+\coordinate (B2) at (\st + \length,\starty);
+\coordinate (C2) at (\st + \length, \starty+2* \length);
+\coordinate (offset2) at (\length/2,0);
+
+\coordinate (A3) at (\stst ,\starty+\length);
+\coordinate (B3) at (\stst + \length,\starty);
+\coordinate (C3) at (\stst + \length, \starty+2* \length);
+
+
+
+\coordinate (A4) at (\ststst ,\starty+\length);
+\coordinate (B4) at (\ststst + \length,\starty);
+\coordinate (C4) at (\ststst + \length, \starty+2* \length);
+
+
+\coordinate (A5) at (\stststst ,\starty+\length);
+\coordinate (B5) at (\stststst + \length,\starty);
+\coordinate (C5) at (\stststst + \length, \starty+2* \length);
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\draw[fill=gray!20] (A) node[]{\pgfuseplotmark{*}}
+  -- (B) node[]{\pgfuseplotmark{*}}
+  -- (C) node[]{\pgfuseplotmark{*}}
+  -- cycle;
+
+\draw[fill=gray!20] ($(A) + (offset1)$ ) node[]{\pgfuseplotmark{*}}
+  -- ($(B) +  (offset1)  $) node[]{\pgfuseplotmark{*}}
+  -- ($(C) +  (offset1) $) node[]{\pgfuseplotmark{*}}
+  -- cycle;
+
+\node at (\startx+\length,\starty+ 0 -\length)  {\Cross};
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\draw[fill=gray!20] (A2) node[]{\pgfuseplotmark{*}}
+  -- (B2) node[]{\pgfuseplotmark{*}}
+  -- (C2) node[]{\pgfuseplotmark{*}}
+  -- cycle;
+
+
+\draw[fill=gray!20] ($(A2) + (offset2)$ ) node[]{\pgfuseplotmark{*}}
+  -- ($(B2) +  (offset2)  $) node[]{\pgfuseplotmark{*}}
+  -- ($(C2) +  (offset2) $) node[]{\pgfuseplotmark{*}}
+  -- cycle;
+
+\node at (\st +\length,\starty+ 0 -\length)  {\Cross};
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\draw[fill=gray!20] (A3) node[]{\pgfuseplotmark{*}}
+  -- (B3) node[]{\pgfuseplotmark{*}}
+  -- (C3) node[]{\pgfuseplotmark{*}}
+  -- cycle;
+
+\draw (B3) -- ($ (B3) +(\length,\length) $)node[]{\pgfuseplotmark{*}};
+
+
+\node at (\stst +\length,\starty+ 0 -\length)  {\Cross};
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\draw[fill=gray!20] ($(A4) + (2*\length,0)$) node[]{\pgfuseplotmark{*}}
+  -- (B4) node[]{\pgfuseplotmark{*}}
+  -- (C4)   node[]{\pgfuseplotmark{*}}
+  -- cycle;
+
+\draw[fill=gray!20] (A4) node{\pgfuseplotmark{*}}
+  -- (B4) node{\pgfuseplotmark{*}}
+  -- (C4) node{\pgfuseplotmark{*}}
+  -- cycle;
+
+
+
+\node at (\ststst +\length,\starty+ 0 -\length)  {$\LARGE\color{green}\checkmark$};
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\draw[fill=gray!20] ($(A5) + (3*\length,0.5*\length)$) node[]{\pgfuseplotmark{*}}
+  -- (B5) node[]{\pgfuseplotmark{*}}
+  -- (C5)   node[]{\pgfuseplotmark{*}}
+  -- cycle;
+
+\draw[fill=gray!20] (A5) node{\pgfuseplotmark{*}}
+  -- (B5) node{\pgfuseplotmark{*}}
+  -- (C5) node{\pgfuseplotmark{*}}
+  -- cycle;
+
+
+
+\node at (\stststst +\length,\starty+ 0 -\length)  {$\LARGE\color{green}\checkmark$};
+
+
+\end{tikzpicture}
+\end{document}

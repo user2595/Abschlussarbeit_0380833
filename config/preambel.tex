@@ -1,0 +1,192 @@
+% preamble
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%  Allgemein
+%\usepackage[latin1]{inputenc}
+\usepackage[ngerman]{babel}     % Deutsche Sprache in automatmisch generiertem
+\usepackage[utf8]{inputenc}     %  =E4 =F6 =FC =DF; danach  geht auch das ß richtig
+\usepackage{longtable}
+\usepackage{latexsym}           % Fuer recht seltene Zeichen
+\usepackage{caption}            % Figure-Captions formatieren
+\usepackage{sectsty}            % Section headings formatieren   
+\usepackage{xparse}             % Für selbstgeschrieben Befehle 
+\usepackage{lmodern}
+ 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%  Layout
+	\usepackage[left=3cm,right=2.5cm,top=2.2cm,bottom=2.2cm,includeheadfoot]{geometry}
+
+	%%%%%% Fonts
+	\usepackage[T1]{fontenc} % T1 Schrift Encoding
+	\usepackage{lmodern}
+	%\usepackage[table]{xcolor}
+	\usepackage[normalem]{ulem}	% unterstreichen im Text
+
+	\usepackage[ngerman]{varioref} % Intelligente Querverweise
+
+	%%%%%% Kopf und Fusszeile
+	\usepackage[%
+	   automark,         % automatische Aktualisierung der Kolumnentitel
+	   markcase=ignoreuppercase,      % Grossbuchstaben verhindern
+	]{scrlayer-scrpage}
+
+	\pagestyle{scrheadings}
+	% loescht voreingestellte Stile
+	\clearscrheadings
+	\clearscrplain
+	% Was steht wo...
+	   \ohead{\pagemark}
+	   \ihead{\headmark}
+	   \ofoot[\pagemark]{} % Außen unten: Seitenzahlen bei plain
+
+	% Angezeigte Abschnitte im Header
+	   \automark[section]{chapter} %[rechts]{links}
+	%
+	% Linien (moegliche Kombination mit Breiten)
+	\setheadsepline{.4pt}[\color{black}]
+
+	\setheadwidth[0pt]{text}
+	\setfootwidth[0pt]{text}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%  Bib und Links
+	\usepackage[%
+		square,	% for square brackets;
+		comma,	% to use commas as separaters;
+		numbers,	% for numerical citations;
+		sort,		% orders multiple citations into the sequence in which they appear in the list of references;
+		sort&compress,    % as sort but in addition multiple numerical citations
+					   % are compressed if possible (as 3-6, 15);
+	]{natbib}
+	\bibliographystyle{dinat}
+
+    \usepackage[margin=0pt]{subcaption} % specific form for captions
+    \usepackage[autostyle]{csquotes} % helper for quoting
+
+
+	\usepackage[
+	   % Farben fuer die Links
+	   colorlinks=true,         % Links erhalten Farben statt Kaeten
+	   urlcolor=true,    % \href{...}{...} external (URL)
+	   filecolor=true,  % \href{...} local file
+	   linkcolor=true,  %\ref{...} and \pageref{...}
+	   % Links
+	   raiselinks=true,			 % calculate real height of the link
+	   breaklinks,              % Links berstehen Zeilenumbruch
+	   backref=page,            % Backlinks im Literaturverzeichnis (section, slide, page, none)
+	   pagebackref=false,        % Backlinks im Literaturverzeichnis mit Seitenangabe
+	   verbose,
+	   hyperindex=true,         % backlinkex index
+	   linktocpage=true,        % Inhaltsverzeichnis verlinkt Seiten
+	   hyperfootnotes=false,     % Keine Links auf Fussnoten
+	   % Bookmarks
+	   bookmarks=true,          % Erzeugung von Bookmarks fuer PDF-Viewer
+	   bookmarksopenlevel=1,    % Gliederungstiefe der Bookmarks
+	   bookmarksopen=true,      % Expandierte Untermenues in Bookmarks
+	   bookmarksnumbered=true,  % Nummerierung der Bookmarks
+	   bookmarkstype=toc,       % Art der Verzeichnisses
+	   % Anchors
+	   plainpages=false,        % Anchors even on plain pages ?
+	   pageanchor=true,         % Pages are linkable
+	   % PDF Informationen
+	   pdfpagelabels=true,      % set PDF page labels
+	]{hyperref}
+	
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%  Mathekram
+	\usepackage{,amsfonts,amssymb,amsthm} % mathematical expression, symbols, fonts, and the whole theorem environment engine
+	\usepackage[
+	   intlimits,  % Like sumlimits, but for integral symbols.
+		]{amsmath}	% math package with additional symbols
+	\usepackage{icomma}			% Erlaubt die Benutzung von Kommas im Mathematikmodus
+	\usepackage{units}				% for units
+	\usepackage{caption}			
+	\usepackage{pdfpages}			% include whole pdf files
+	\usepackage{ragged2e}			% Besserer Flatternsatz (Linksbuendig, statt Blocksatz)
+% Nützliche Abkürzungen
+    \newcommand{\NN}{\mathbb{N}} % natürliche Zahlen
+    \newcommand{\RR}{\mathbb{R}} % reelle Zahlen
+    \newcommand{\QQ}{\mathbb{Q}} % rationale Zahlen
+    \newcommand{\ZZ}{\mathbb{Z}} % ganze Zahlen
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%  Bilder
+	\usepackage{tikz}
+    \usepackage{siunitx}
+    \usepackage{standalone}
+ 	\usetikzlibrary{positioning, calc,quotes,angles,arrows,decorations.pathmorphing,decorations.pathreplacing,quotes} 
+    \usetikzlibrary{shapes,backgrounds,fit,matrix}
+    \usepackage{svg}                % für das einbinden von svg bildern
+	\usepackage{float}              % Stellt die Option [H] fuer Floats zur Verfgung
+   
+	\usepackage[figure]{hypcap}     % Links auf Gleitumgebungen springen nicht zur Beschriftung,
+	                                % sondern zum Anfang der Gleitumgebung
+%    \usepackage{xcolor,graphicx}    % graphics and colorings
+  
+  \usepackage{graphicx}           %zusätzlich zu wrapfig zum einfügen von bildern der benötigt wird. 
+    \usepackage{wrapfig}            %Textumflossene Bilder die nicht Textblock-Breite sind 
+    
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%  Tabellen
+	\usepackage{tabularx}		% Automatische Spaltenbreite
+	\usepackage{booktabs} 		% bessere Abstaende innerhalb der Tabelle (Layout))
+	\usepackage{multirow}       % Mehrfachspalten
+    \usepackage{rotating}       % if you want to rotate any object
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%  Pseudocode
+\usepackage[ruled,vlined,linesnumbered,german,onelanguage]{algorithm2e}
+\usepackage{algpseudocode}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% theorem und beweise
+
+%\cref is a powerfull command that automatically states the current environment (e.g. Theorem, Lemma, etc.)
+\usepackage[sort&compress,nameinlink,noabbrev,capitalize]{cleveref}
+\usepackage{scrextend} % super powerful tool that helps a bit with everything
+
+
+
+
+
+%DIF PREAMBLE EXTENSION ADDED BY LATEXDIFF
+%DIF UNDERLINE PREAMBLE %DIF PREAMBLE
+\RequirePackage[normalem]{ulem} %DIF PREAMBLE
+\RequirePackage{color}\definecolor{RED}{rgb}{1,0,0}\definecolor{BLUE}{rgb}{0,0,1} %DIF PREAMBLE
+\providecommand{\DIFadd}[1]{{\protect\color{blue}\uwave{#1}}} %DIF PREAMBLE
+\providecommand{\DIFdel}[1]{{\protect\color{red}\sout{#1}}}                      %DIF PREAMBLE
+%DIF SAFE PREAMBLE %DIF PREAMBLE
+\providecommand{\DIFaddbegin}{} %DIF PREAMBLE
+\providecommand{\DIFaddend}{} %DIF PREAMBLE
+\providecommand{\DIFdelbegin}{} %DIF PREAMBLE
+\providecommand{\DIFdelend}{} %DIF PREAMBLE
+\providecommand{\DIFmodbegin}{} %DIF PREAMBLE
+\providecommand{\DIFmodend}{} %DIF PREAMBLE
+%DIF FLOATSAFE PREAMBLE %DIF PREAMBLE
+\providecommand{\DIFaddFL}[1]{\DIFadd{#1}} %DIF PREAMBLE
+\providecommand{\DIFdelFL}[1]{\DIFdel{#1}} %DIF PREAMBLE
+\providecommand{\DIFaddbeginFL}{} %DIF PREAMBLE
+\providecommand{\DIFaddendFL}{} %DIF PREAMBLE
+\providecommand{\DIFdelbeginFL}{} %DIF PREAMBLE
+\providecommand{\DIFdelendFL}{} %DIF PREAMBLE
+%DIF LISTINGS PREAMBLE %DIF PREAMBLE
+\RequirePackage{listings} %DIF PREAMBLE
+\RequirePackage{color} %DIF PREAMBLE
+\lstdefinelanguage{DIFcode}{ %DIF PREAMBLE
+%DIF DIFCODE_UNDERLINE %DIF PREAMBLE
+  moredelim=[il][\color{red}\sout]{\%DIF\ <\ }, %DIF PREAMBLE
+  moredelim=[il][\color{blue}\uwave]{\%DIF\ >\ } %DIF PREAMBLE
+} %DIF PREAMBLE
+\lstdefinestyle{DIFverbatimstyle}{ %DIF PREAMBLE
+	language=DIFcode, %DIF PREAMBLE
+	basicstyle=\ttfamily, %DIF PREAMBLE
+	columns=fullflexible, %DIF PREAMBLE
+	keepspaces=true %DIF PREAMBLE
+} %DIF PREAMBLE
+\lstnewenvironment{DIFverbatim}{\lstset{style=DIFverbatimstyle}}{} %DIF PREAMBLE
+\lstnewenvironment{DIFverbatim*}{\lstset{style=DIFverbatimstyle,showspaces=true}}{} %DIF PREAMBLE
+%DIF END PREAMBLE EXTENSION ADDED BY LATEXDIFF
+
+
+
+
+
+

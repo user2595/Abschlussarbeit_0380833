@@ -1,0 +1,61 @@
+\documentclass[12pt, tikz, border=5mm]{standalone}
+\usepackage{tikz}
+\usepackage{amssymb}
+
+\begin{document}
+
+
+\usetikzlibrary{calc}
+\usetikzlibrary{quotes,angles}
+\begin{tikzpicture}
+  
+
+
+
+\newcommand{\length}{1}
+\newcommand{\radius}{0.5}
+
+
+\coordinate (midpoint) at (0,0);
+\coordinate (A) at ($(midpoint) +(0,2*\length) $);
+\coordinate (B) at ($(midpoint) +(2*\length,\length) $);
+\coordinate (C) at ($(midpoint) +(2*\length,-\length) $);
+\coordinate (D) at ($(midpoint) +(0,-2*\length) $);
+\coordinate (E) at ($(midpoint) +(-2*\length,-\length) $);
+\coordinate (F) at ($(midpoint) +(-2*\length,\length) $);
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+\draw[fill=gray!60] 
+       (A)  node[]{\pgfuseplotmark{*}} node[anchor=north]{} 
+    -- (B) node[]{\pgfuseplotmark{*}} node[above]{$k$}
+    -- (C) node[]{\pgfuseplotmark{*}} node[below]{$j$}
+    -- (D) node[]{\pgfuseplotmark{*}} node[anchor=north]{}
+    -- (E) node[]{\pgfuseplotmark{*}} node[anchor=north]{}
+    -- (F) node[]{\pgfuseplotmark{*}} node[anchor=north]{}
+     -- cycle;
+     
+\draw[] (A)   -- (midpoint) node[]{\pgfuseplotmark{*}}   node[below]{$i$} ;
+\draw[] (B)   -- (midpoint);
+\draw[] (C)   -- (midpoint);
+\draw[] (D)   -- (midpoint);
+\draw[] (E)   -- (midpoint);
+\draw[] (F)   -- (midpoint);
+
+%\draw[] ($ (midpoint) + (\lenght,0) $) arc (0:360:\lenght) node[above,midway]{$\Theta_{i}$} ;
+\draw[fill=gray!30, opacity=0.8]($ (midpoint) + 0.3*(B) $) arc (35:-35:0.5) node[below,right]{$\theta_{i}^{j,k}$} --  (midpoint)
+ -- cycle;;
+\draw[fill=gray!70, opacity=0.3]  ($ (midpoint) + (\radius,0) $) arc (0:-360:\radius) node[below, left]{$\Theta_{i}$} ;
+
+
+%\draw[] ($ (midpoint) + (\length,-0.5*\length) $) arc (-65:75:0.5) node[above,midway]{$\Theta_{i}$} ;
+     
+
+%\draw  (0+0.5,\height-1) arc (0:10) node[above,midway]{$\Theta_{s}$};
+
+
+\end{tikzpicture}
+\end{document}

@@ -1,0 +1,67 @@
+
+
+\documentclass[8pt, tikz, border=5mm]{standalone}
+
+\begin{document}
+
+\usetikzlibrary{calc}
+\usetikzlibrary{angles}
+\begin{tikzpicture}
+
+
+
+
+\newcommand{\radiusx}{2}
+\newcommand{\radiusy}{.5}
+\newcommand{\height}{4}
+
+
+
+\coordinate (a) at (-{\radiusx*sqrt(1-(\radiusy/\height)*(\radiusy/\height))},{\radiusy*(\radiusy/\height)});
+
+\coordinate (b) at ({\radiusx*sqrt(1-(\radiusy/\height)*(\radiusy/\height))},{\radiusy*(\radiusy/\height)});
+
+
+
+
+
+\draw[fill=gray!30] (a)--(0,\height)--(b)--cycle;
+
+\fill[gray!50] circle (\radiusx{} and \radiusy);
+
+\begin{scope}
+\clip ([xshift=-2mm]a) rectangle ($(b)+(1mm,-2*\radiusy)$);
+\draw circle (\radiusx{} and \radiusy);
+
+\end{scope}
+
+\begin{scope}
+
+\clip ([xshift=-2mm]a) rectangle ($(b)+(1mm,2*\radiusy)$);
+\draw[dashed] circle (\radiusx{} and \radiusy);
+\draw [ line width=0.7mm, color=blue!70](0,0.9) circle (1.5  and \radiusy);
+\end{scope}
+
+%\draw[dashed] (0,\height)|-(\radiusx,0) node[right, pos=.25]{$h$} node[above,pos=.75]{$r$};
+%\draw (0,.15)-|(.15,0);
+
+
+\draw  ( 0,\height) coordinate (a)  (\radiusx,0) coordinate (b) (-1* \radiusx ,0) coordinate (c); 
+
+% \pic[draw=orange,<->,angle radius=\radiusx * 20,fill=teal!30]{angle=c--a--b};
+% \draw  (0+0.5,\height-1) arc (-75:-105:2) node[above,midway]{$\Theta_{s}$};
+
+
+\draw[ line width=0.7mm, color=blue!70 ](\radiusx/2,\radiusy) --  (0,\height);
+\coordinate[label=below:$v$ ]  (d)   at (\radiusx/2,\radiusy) ;
+\coordinate[label=above:$e_{(v,v)}$] (e)  at (0,\radiusy);
+\coordinate[label=above:$e_{(v,s)}$ ] (f)  at (0,\height/2);
+\coordinate[label=above:$s$] (c) at (0,\height);
+
+\draw (\radiusx/2,\radiusy) node[]{\pgfuseplotmark{*}}; 
+\draw (0,\height) node[]{\pgfuseplotmark{*}};
+
+%\draw  ( 0, 0.8* \height) coordinate (d) node{$\Theta_s$};
+\end{tikzpicture}
+
+\end{document}

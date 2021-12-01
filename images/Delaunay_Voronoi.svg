@@ -1,0 +1,16 @@
+<svg width="441" height="441" viewBox="0 0 353 353" version="1.1" xmlns="http://www.w3.org/2000/svg"><link xmlns="" type="text/css" rel="stylesheet" id="dark-mode-custom-link"/><link xmlns="" type="text/css" rel="stylesheet" id="dark-mode-general-link"/><style xmlns="" lang="en" type="text/css" id="dark-mode-custom-style"/><style xmlns="" lang="en" type="text/css" id="dark-mode-native-style"/>
+<defs>
+<marker id="redDot" viewBox="-1 -1 2 2" markerWidth="4" markerHeight="4"><circle r="1" fill="red"/></marker>
+<marker id="blkDot" viewBox="-1 -1 2 2" markerWidth="4" markerHeight="4"><circle r="1"/></marker>
+</defs>
+<g fill="none" stroke-width="1.6">
+<g stroke="red">
+<path d="M204.1.2l-30 107.4-48 34.5 3.3 28.9-36.1 70.7 37.3 63L221.3 245l.8-4.8 34.4-26.3 1.2-72 30.8-18.1L252.7.2" marker-mid="url(#redDot)"/>
+<path d="M.2 79.5l125.9 62.6m48-34.5 83.6 34.3m30.8-18.1 64-.5M129.4 171 222 240.2m34.5-26.3 96 22.2M.2 257.7l93.1-16m128 3.3L264 352.5M130.6 304.7l-.6 47.8"/>
+</g>
+<g stroke="#000">
+<path d="M121.7 50.2l180 20 .8 106.9-20.8 90-89.2 35.4L68.7 301 50.2 194.1l106.9 54.6 54.6-73.1 37-90Z" marker-start="url(#blkDot)" marker-mid="url(#blkDot)"/>
+<path d="M301.7 70.2l-53 15.4 53.8 91.5-90.8-1.5L50.2 194.1 121.7 50.2l90 125.4 70 91.5-124.6-18.4 35.4 53.8m-35.4-53.8L68.7 301"/>
+</g>
+</g>
+</svg>

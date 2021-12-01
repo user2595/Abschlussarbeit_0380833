@@ -1,0 +1,116 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Macros 
+
+% \NewDocumentCommand{\foocmd}{ O{default1} O{default2} m }{#1 #2 #3}
+%                         %     ⤷ #1        ⤷ #2    ⤷ #3
+
+%   \foocmd{foo} \par                           default1 default2 foo
+%   \foocmd[nondefault1]{foo} \par              nondefault1 default2 foo
+%   \foocmd[nondefault2][notfoo2]{foo} \par     nondefault12 notfoo2 foo
+
+
+\newboolean{boolvar} %Deklaration
+\setboolean{boolvar}{true} %Zuweisung
+
+ \NewDocumentCommand{\todo}{  O{ueberarbeiten!} O{red}  }{
+ \ifthenelse{\boolean{boolvar}}
+    { [\textcolor{#2}{TODO: #1 }]  }
+    { %[\textcolor{$2}{TODO: $1 }]  }
+
+    }
+} 
+
+\newcommand{\delaunayRefinement}{Delaunay-Refinement }
+\newcommand{\delaunayRefinements}{Delaunay-Refinements }
+\newcommand{\delaunayTriagnulierung}{Delaunay-Triagnulierung}
+
+ 
+ \NewDocumentCommand{\innenwinkel}{ s O{i} O{j} O{k}  }{
+ \IfBooleanTF #1 
+ {\theta_{#2}^{#3,#4}}
+ {$\theta_{#2}^{#3,#4}$} 
+ }
+ \NewDocumentCommand{\nominnenwinkel}{ s O{i} O{j} O{k}  }{
+ \IfBooleanTF #1 
+ {\tilde{\theta}_{#2}^{#3,#4}} 
+ {$\tilde{\theta} _{#2}^{#3,#4}$}
+ }
+ 
+ \NewDocumentCommand{\gesamtwinkel}{s O{i}}{
+   \IfBooleanTF #1 
+ {\Theta_{#2}}
+ {$\Theta_{#2}$} 
+ }
+ 
+ \NewDocumentCommand{\bezugsrichtung}{s O{i}}{
+   \IfBooleanTF #1 
+ {e_{#2}}
+ {$e_{#2}$}
+ }
+ 
+  \NewDocumentCommand{\richtung}{s O{i}}{
+   \IfBooleanTF #1 
+ {\phi_{#2}}
+ {$\phi_{#2}$}
+ }
+ 
+ 
+ 
+ \NewDocumentCommand{\algorithmusname}{s O{i}}{
+   \IfBooleanTF #1 
+ {\text{intrinsisches Delaunay-Refinement}}
+ {intrinsisches Delaunay-Refinement}
+ }
+ 
+ 
+ %umkreisradius-kürzeste-kante-verhältnis 
+ \NewDocumentCommand{\kuezesteKante}{s}{
+    \IfBooleanTF #1 
+        {l}
+        {$l$}
+ }
+ \NewDocumentCommand{\umkreisradius}{s}{
+     \IfBooleanTF #1 
+        {r}
+        {$r$}
+ }
+  \NewDocumentCommand{\kleinsterWinkel}{s}{
+     \IfBooleanTF #1 
+        {\Theta_{\text{min}}}
+        {$\Theta_{\text{min}}$}
+ }
+ 
+   \NewDocumentCommand{\Dichte}{s O{v}}{
+     \IfBooleanTF #1 
+        {D_{#2}}
+        {$D_{#2}$}
+ }
+ 
+ 
+    \NewDocumentCommand{\irregulaereKante}{s O{(v,v)}}{
+     \IfBooleanTF #1 
+        {e_{#2}}
+        {$e_{#2}$}
+ }
+ 
+ 
+    \NewDocumentCommand{\regulaereKante}{s O{(v,s)}}{
+     \IfBooleanTF #1 
+        {e_{#2}}
+        {$e_{#2}$}
+ }
+ 
+ \NewDocumentCommand{\UrzkK}{s O{(v,s)}}{
+          \IfBooleanTF #1 
+        {\kappa}
+        {$\kappa$}
+ }
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 

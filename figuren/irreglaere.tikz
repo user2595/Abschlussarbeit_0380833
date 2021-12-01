@@ -1,0 +1,62 @@
+
+
+
+\begin{tikzpicture}
+
+\usetikzlibrary{calc}
+\newcommand{\radiusx}{2}
+\newcommand{\radiusy}{.5}
+\newcommand{\height}{6}
+
+  \newcommand{\delayx}{6}
+
+\coordinate (a) at (-{\radiusx*sqrt(1-(\radiusy/\height)*(\radiusy/\height))},{\radiusy*(\radiusy/\height)});
+
+\coordinate (b) at ({\radiusx*sqrt(1-(\radiusy/\height)*(\radiusy/\height))},{\radiusy*(\radiusy/\height)});
+
+
+
+
+
+\draw[fill=gray!30] (a)--(0,\height)--(b)--cycle;
+
+\fill[gray!50] circle (\radiusx{} and \radiusy);
+
+\begin{scope}
+\clip ([xshift=-2mm]a) rectangle ($(b)+(1mm,-2*\radiusy)$);
+\draw circle (\radiusx{} and \radiusy);
+\end{scope}
+
+\begin{scope}
+\clip ([xshift=-2mm]a) rectangle ($(b)+(1mm,2*\radiusy)$);
+\draw[dashed] circle (\radiusx{} and \radiusy);
+\end{scope}
+
+%\draw[dashed] (0,\height)|-(\radiusx,0) node[right, pos=.25]{$h$} node[above,pos=.75]{$r$};
+%\draw (0,.15)-|(.15,0);
+
+
+\draw  ( 0,\height) coordinate (a)  (\radiusx,0) coordinate (b) (-1* \radiusx ,0) coordinate (c); 
+
+% \pic[draw=orange,<->,angle radius=\radiusx * 20,fill=teal!30]{angle=c--a--b};
+\draw  (0+0.5,\height-1.5) arc (-75:-105:2) node[above,midway]{$\Theta_{s}$};
+
+
+\draw[->](\radiusx/2,-\radiusy)--node[above,rotate=100] {$e_{(v,v)}$} (0,\height);
+\coordinate[label=below:$v$] (d)  at (\radiusx/2,-\radiusy);
+\coordinate[label=below:$e_{(v,v)}$] (d)  at (0,-\radiusy);
+\coordinate[label=above:$s$] (c) at (0,\height);
+
+
+\draw[fill=gray!30]   (0+\delayx,0) coordinate[label=below:$v$] (a) -- node[above,rotate=50] {$e_{(v,s)}$} 
+        (3+\delayx,6) coordinate[label=above:$s$] (b) -- node[above,rotate=-50] {$e_{(v,s)}$}
+        (6+\delayx,0) coordinate[label=below:$v$] (c) --node[above] {$e_{(v,v)}$}  cycle;
+        
+    \draw[fill=gray!50]  ({3+\delayx+.5},{6-1}) arc (-60:-120:1) node[above,midway]{$\Theta_{s}$};
+    
+
+
+
+
+\end{tikzpicture}
+

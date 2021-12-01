@@ -1,0 +1,87 @@
+% commands
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Einrückung global entfernen
+\setlength{\parindent}{0pt}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% maximal zulässigen Wortabstand einstellen
+\setlength\emergencystretch{1em} 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Farben fuer Verlinkungen definieren/aendern
+ \usepackage{color}
+   %Linkfarbe setzen
+   \definecolor{LinkColor}{gray}{0}
+   %PDF Farben einstellen
+   \hypersetup{colorlinks=true,%
+   linkcolor=LinkColor,%
+   citecolor=LinkColor,%
+   filecolor=LinkColor,%
+   menucolor=LinkColor,%
+   urlcolor=LinkColor} 
+   
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Aussehen der Ueberschriften
+
+	\setkomafont{chapter}{\huge\sffamily}    % Chapter
+	\setkomafont{sectioning}{\sffamily} %  % Titelzeilen % \bfseries
+	\setkomafont{pagenumber}{\sffamily}             % Seitenzahl
+	\setkomafont{descriptionlabel}{\itshape}        % Kopfzeile
+	%
+	\addtokomafont{sectioning}{\color{black}} % Farbe der Ueberschriften
+	\addtokomafont{chapter}{\color{black}} % Farbe der Ueberschriften
+	\renewcommand*{\raggedsection}{\raggedright} % Titelzeile linksbuendig, haengend
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Silbentrennung
+	\hyphenation{}
+	
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Feste Spaltenbreiten zentriert, linksbuendig oder rechtsbuendig	
+\newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1}} % linksbündig mit Breitenangabe
+\newcolumntype{C}[1]{>{\centering\arraybackslash}p{#1}} % zentriert mit Breitenangabe
+\newcolumntype{R}[1]{>{\raggedleft\arraybackslash}p{#1}} % rechtsbündig mit Breitenangabe	
+
+
+% theorem environment
+\theoremstyle{plain} % typical theorem-style (bold header, italic font)
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Korollar}
+\newtheorem{observation}[theorem]{Beobachtung}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{rrule}{Reduktionsregel}[section]
+
+\crefname{rrule}{Reduktionsregel}{Reduktionsregeln} % how cleverref (\cref) has to handle these environments
+\Crefname{rrule}{RR}{RRs} % with \Cref us can use what you defined here---somtimes useful if you want to abbreviate environment when citing (e.g. in tables or figures)
+
+\theoremstyle{definition} % typical definition-style (bold header, normal font)
+\newtheorem{definition}[theorem]{Definition}
+
+\theoremstyle{remark} % typical theorem-style (italic header, normal font)
+\newtheorem{example}{Example}
+\newtheorem*{remark}{Remark}
+\newtheorem{reduction}{Reduction}
+\theoremstyle{plain}
+
+% problem definition evironment: gets three arguments (1) problem name #1 (2) input specification #2 (3) question specification #3
+\newcommand{\problemdef}[3]{
+  \begin{center}
+    \begin{minipage}{0.95\textwidth}
+      \noindent
+      \textsc{#1}
+      
+      \vspace{2pt}
+      \setlength{\tabcolsep}{3pt}
+      \begin{tabularx}{\textwidth}{@{}lX@{}}
+        \textbf{Eingabe:} 		& #2 \\
+        \textbf{Frage:} 	& #3
+      \end{tabularx}
+    \end{minipage}
+  \end{center}
+}
+
+
+
+	
+\input{config/new_commant.sty}

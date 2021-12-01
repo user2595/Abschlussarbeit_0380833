@@ -1,0 +1,85 @@
+\documentclass[%
+   final,      % fertiges Dokument
+%%%% --- Schriftgröße ---
+   11pt, 
+   headings=big,
+%%%% --- Sprache ---
+   ngerman,           % wird an andere Pakete weitergereicht
+%%%% === Seitengröße ===
+   a4paper,
+%%%% === Optionen für den Satzspiegel ===
+   BCOR=5mm,          % Zusaetzlicher Rand auf der Innenseite
+   DIV=11,           % Seitengroesse (siehe Koma Skript Dokumentation !)
+   1.1headlines,     % Zeilenanzahl der Kopfzeilen
+   headinclude=false,   % Kopf nicht einbeziehen
+   footinclude=false,   % Fuss nicht einbeziehen
+   mpinclude=false,     % Margin nicht einbeziehen
+   pagesize,         % Schreibt die Papiergroesse in die Datei.
+                     % Wichtig fuer Konvertierungen
+%%%% === Layout ===
+   %oneside,       % einseitiges Layout  
+   %twoside,
+    openany,  % Kapitel beginnen auf jeder Seite
+   titlepage,        % Titel als einzelne Seite ('titlepage' Umgebung)
+%%%% --- Absatzeinzug ---
+   parskip=false,        % Eingerückt (Standard)
+%%%% --- Kapitel ---
+   chapterprefix=false,  % keine Ausgabe von 'Kapitel:'
+%%%% === Verzeichnisse (TOC, LOF, LOT, BIB) ===
+   bibliography=totoc,         % Bibliographie ins TOC
+   toc=graduated,        % eingereuckte Gliederung
+   listof=graduated,      % eingereuckte LOT, LOF
+   numbers=enddot,  % Überschriftnummerierung mit Punkt, siehe DUDEN !
+]{scrbook}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Preambel
+\input{config/preambel}
+\input{config/add_commands}
+
+
+\begin{document}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Deckblatt
+	
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Verzeichnisse und Co
+	\frontmatter
+	    \input{content/0_Deckblatt}
+	    \cleardoublepage
+		\input{content/1_Eidesstattliche}
+		\cleardoublepage
+		%\input{content/2_Danksagung}
+		\input{content/3_Zusammenfassung}
+		\tableofcontents
+		\cleardoublepage% Ist bei scrbook nicht notwendig
+    % 		\listoffigures
+% 		% beides auf einer Seite
+% 		\begingroup		
+% 			\renewcommand\clearpage{\relax} 
+% 			\listoftables
+% 		\endgroup
+% 		\input{content/Symbolverzeichniss.tex}
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+% % Hauptteil 
+    \mainmatter
+  		\input{content/4_Einleitung}
+ 		\input{content/5_Verwandte_Arbeiten}
+  		\input{content/6_Grundlagen}
+  		\input{content/7_Haupteil}
+        \input{content/7_Terminierung(Hauptteil)}
+        \input{content/8_Schluss}
+         
+
+    % Quellen
+ 		%\bibliographystyle{alpha}
+ 		\bibliography{Quellen/Literatur}
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% % Anhang
+% 	\appendix
+% 		\input{attachment/Anhang}
+% 		\includepdf{}
+		
+\end{document}
