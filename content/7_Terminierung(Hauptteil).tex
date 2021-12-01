@@ -1,4 +1,4 @@
-\chapter{Terminierung des intrinsischen Delaunay-Refinement}
+\chapter{ Terminierung des intrinsischen Delaunay-Refinement}
 \label{kap:Terminierung}
 
 % Die Intuition des Beweises zur Terminierung beruht auf zwei Faktoren. Zum einen ist die Fläche der Triangulierung begrenzt, kann somit nicht erweitert werden. Zum anderen ist gewährleistet, dass alle Kanten, die durch den Algorithmus hinzugefügt werden, eine minimale Länge haben. Das liegt daran, dass beim Einfügen von Knoten garantiert ist,  dass keine zwei Knoten zu nahe beieinander liegen können.
@@ -54,8 +54,8 @@ Das folgende Lemma besagt, dass für einen Iterationsschritt die jeweils neu erz
 \begin{figure}[h!]
     \centering
     \includegraphics[width=5in]{images/adejazent.png}
-    \caption{Illustration, dass alle neu erzeugten Kanten adjazent zum neu eingefügten Knoten sind \cite{shewchuk:1997:delaunay} }%\cite{shewchuk:1997:delaunay}}
-    \label{fig:Punkt_einfügen}
+    \caption{Illustration, dass alle neu erzeugten Kanten adjazent zum neu eingefügten Knoten sind~\cite{shewchuk:1997:delaunay} }%\cite{shewchuk:1997:delaunay}}
+    \label{fig:adejazent}
 \end{figure}
  
 
@@ -98,7 +98,7 @@ dann folgt $e \not \in   E $.\\
 %Beweis per Kontraposition: 
 Angenommen $e \not \in  N(v)$, dann ist zu zeigen, dass $e\in E $ gilt.\\
 
-Nach \cite[Definition 3]{Bobenko:2007:LaplaceBeltrami} ist eine Kante in einer Delaunay-Triangulierung  enthalten genau dann, wenn eine leere Kreisscheibe existiert, auf deren Rand nur ihre beiden Endknoten liegen.\\ 
+Nach~\cite[Definition 3]{Bobenko:2007:LaplaceBeltrami} ist eine Kante in einer Delaunay-Triangulierung  enthalten genau dann, wenn eine leere Kreisscheibe existiert, auf deren Rand nur ihre beiden Endknoten liegen.\\ 
 
     Wegen $V \subset V^\prime$  ist jede leere Kreisscheibe in $M^\prime$  auch in  $M$ enthalten. Per Annahme enthält $M$ auch beide Endknoten von $e$. Somit enthält $M$ auch $e$.     
 \end{proof}
@@ -136,7 +136,7 @@ Dann gilt:
 \begin{figure}[h]
     \centering
     \includegraphics[width=3in]{images/Kreiswinkelsatz.png}
-    \caption{Illustration des Kreiswinkelsatzes \cite{shewchuk:1997:delaunay}}
+    \caption{Illustration des Kreiswinkelsatzes~\cite{shewchuk:1997:delaunay}}
     \label{fig:kreiswinkelsatz}
 \end{figure}
 
@@ -208,7 +208,7 @@ Bei Triangulierung von geschlossenen StF-Oberfläche gibt es im Vergleich zu Tri
 
 
 Die minimale Länge von regulären Kanten wird dadurch festgelegt, dass Knoten nicht zu nahe bei einander eingefügt werden können. Dies gilt nicht für irreguläre Kanten.
-Dabei ist es wichtig zu unterscheiden, ob sie sich um ein Loch, einen Bereich mit kurzem Umfang oder Kegelspitze wickelt. Bei einem Loch oder einem Bereich mit kurzem Umfang existiert ebenfalls ein festes Minimum, nämlich der minimale Umfang der StF-Oberfläche. Diese lässt sich berechnen \cite{erickson:2005:generator}. Bei Kegelspitzen kann sich die Schleife  theoretisch unendlich klein zusammen ziehen. Daher müssen wir diesen fall gesondert betrachten.   
+Dabei ist es wichtig zu unterscheiden, ob sie sich um ein Loch, einen Bereich mit kurzem Umfang oder Kegelspitze wickelt. Bei einem Loch oder einem Bereich mit kurzem Umfang existiert ebenfalls ein festes Minimum, nämlich der minimale Umfang der StF-Oberfläche. Diese lässt sich berechnen~\cite{erickson:2005:generator}. Bei Kegelspitzen kann sich die Schleife  theoretisch unendlich klein zusammen ziehen. Daher müssen wir diesen fall gesondert betrachten.   
 
 
 
@@ -364,23 +364,23 @@ für alle Dreiecke aus $M$.
 
 \begin{proof}
 
-Laut Lemma \ref{le:auffaltung} kann der Algorithmus keine Umkreisradien größer $r(k_{max})$ erzeugen.
+Laut Lemma~\ref{le:auffaltung} kann der Algorithmus keine Umkreisradien größer $r(k_{max})$ erzeugen.
 
-Nehmen wir an, dass der Algorithmus \algorithmusname eine Kante, die kürzer als $\min(d_{min}, g_{min} )$ ist, einfügt. Sei \regulaereKante[(v,u)] die erste Kante dieser Art. Nach Lemma \ref{le:adejazent} ist \regulaereKante[(v,u)] inzident zum zuletzt eingefügten knoten. Sei dieser $v$ und $t_{bad}$ das zugehörige dünne Dreieck. \\
+Nehmen wir an, dass der Algorithmus \algorithmusname eine Kante, die kürzer als $\min(d_{min}, g_{min} )$ ist, einfügt. Sei~\regulaereKante[(v,u)] die erste Kante dieser Art. Nach Lemma~\ref{le:adejazent} ist \regulaereKante[(v,u)] inzident zum zuletzt eingefügten knoten. Sei dieser $v$ und $t_{bad}$ das zugehörige dünne Dreieck. \\
 
 Da vor dem Einfügen von $v$ keine Kante kürzer als $\min(d_{min}, g_{min} )$ existiert hat, gilt  
 \begin{align*}
     d(t_{bad}) \geq d_{min}.\\
 \end{align*} 
 
-Gemäß Lemma \ref{le:irregulär_entfernung} und \ref{le:regulär_entfernung} gilt, wenn \regulaereKante[(v,u)] eine reguläre Kante oder eine irreguläre Kante um eine Kegelspitze ist, die Abschätzung
+Gemäß Lemma~\ref{le:irregulär_entfernung} und~\ref{le:regulär_entfernung} gilt, wenn \regulaereKante[(v,u)] eine reguläre Kante oder eine irreguläre Kante um eine Kegelspitze ist, die Abschätzung
 
 \begin{align*}
     d(\regulaereKante*[(v,u)]) \geq r(t_{bad}).\\
 \end{align*} 
 
 
-Da $t_{bad}$ dünn ist, gilt nach Lemma \ref{le:dünnes_dreieck} 
+Da $t_{bad}$ dünn ist, gilt nach Lemma~\ref{le:dünnes_dreieck} 
 \begin{align*}
     r(t_{bad}) \geq d(t_{bad}).
 \end{align*}
@@ -406,7 +406,7 @@ Das steht jedoch im Widerspruch zu der Annahme, dass \regulaereKante[(v,u)] kür
 
 \end{proof}
 
-In Lemma \ref{lem:Obergrenze} haben wir gezeigt, dass der Algorithmus nur Dreiecke erzeugt mit $\kappa \geq \kappa* $.
+In Lemma~\ref{lem:Obergrenze} haben wir gezeigt, dass der Algorithmus nur Dreiecke erzeugt mit $\kappa \geq \kappa* $.
 
 Nun wollen wir zeigen, dass \algorithmusname aufgrund der begrenzten Fläche terminiert. Da die Fläche der Eingabetriangulierung endlich ist, der Algorithmus in jeder Iteration neue Dreiecke erzeugt und diese Dreiecke wiederum eine Mindestfläche $A_{min}$ haben, folgt, dass der Algorithmus terminieren muss, sobald er die zur Verfügung stehende Gesamtfläche nicht mehr weiter aufteilen kann.\\  
 
@@ -446,7 +446,7 @@ Das intrinsische Delaunay-Refinement mit $M$ und \kleinsterWinkel als Eingabe te
 % \end{proof}
 
 \begin{proof}
-das lemma \ref{lem:Obergrenze} zeigt, dass es keine Kante kürzer ist als  \begin{align*}
+das lemma~\ref{lem:Obergrenze} zeigt, dass es keine Kante kürzer ist als  \begin{align*}
     D = \min(d_{min},g_{min})
 \end{align*}
 

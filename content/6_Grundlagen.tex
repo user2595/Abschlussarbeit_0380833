@@ -1,4 +1,4 @@
-\chapter{Grundlagen}
+\chapter{ Grundlagen}
 Diese Arbeit befasst sich mit Winkeldefekten und ihren Auswirkungen auf die Terminierung des intrinsischen Delaunay-Refinement. Zum Verständnis sind Grundkenntnisse der computergestützten Geometrie und deren Begrifflichkeiten sowie allgemeine mathematische Grundbegriffe erforderlich. Im Folgenden werden daher einige der wichtigsten Grundbegriffe und Definitionen erläutert. Wir orientieren uns dabei in der
 Formulierung an den Arbeiten von 
  Bobenko, Springborn, Fisher u. a., Sharp u. a. und Shewchuk
@@ -57,7 +57,7 @@ Ein Knoten $s \in V$  wird als Kegelspitze bezeichnet, wenn er einen Winkeldefek
 Es werden zwei Arten von Kegelspitzen unterschieden:
  \begin{itemize}
      \item sphärische Kegelspitzen, falls $\Theta_s < 2\pi $ und 
-     \item hyperbolische Kegelspitzen, falls $\Theta_s > 2\pi $ .
+     \item hyperbolische Kegelspitzen, falls $\Theta_s > 2\pi $.
  \end{itemize} 
 
 
@@ -73,30 +73,30 @@ Es werden zwei Arten von Kegelspitzen unterschieden:
 
 \section*{Delaunay-Triangulierung einer stückchenweise flachen Oberfläche}
 \begin{figure}[H]%{r}{5cm}
-    \label{fig:hase}
     \centering
     \includegraphics[width=5in]{images/image1.png}
   %\setcapindent{0em}
   \caption{Illustration der Triangulierung einer stückchenweise flachen Oberfläche}
+   \label{fig:hase}
 \end{figure}
 
 \subsection*{Stückchenweise flache Oberflächen (StF-Oberflächen)}
 
-Stückweise flache Oberflächen wie in Abbildung \ref{fig:hase} gezeigt sind 2-Mannigfaltigkeit mit kegelspitzenartigen Singularitäten. Intuitiv bedeutet das, dass diese Flächen lokal euklidisch sind außer an einigen singulären Punkten. Dort verhalten sie sich wie eine sphärische oder hyperbolische Kegelspitze. Kegelspitzen können im Allgemeinen dort auftreten, wo Linien zusammengeführt werden (siehe Abbildung \ref{fig:hase}).
+Stückweise flache Oberflächen wie in Abbildung~\ref{fig:hase} gezeigt sind 2-Mannigfaltigkeit mit kegelspitzenartigen Singularitäten. Intuitiv bedeutet das, dass diese Flächen lokal euklidisch sind außer an einigen singulären Punkten. Dort verhalten sie sich wie eine sphärische oder hyperbolische Kegelspitze. Kegelspitzen können im Allgemeinen dort auftreten, wo Linien zusammengeführt werden (siehe Abbildung~\ref{fig:hase}).
 
 \subsection*{Triangulierung  einer  StF-Oberfläche}
 Sei $M = (V,E,T)$ eine Triangulierung einer StF-Oberfläche. Dann gilt für die Menge der Kegelspitzen $S$ der StF-Oberfläche, dass $S \subset V$.\\ 
  
-Die Triangulierung einer Stf-Oberfläche ist für gewöhnlich eine Sammlung von ebenen Dreiecken im Raum (siehe Abbildung \ref{fig:hase}). Dies ist jedoch keine Anforderung an die Triangulierung, es wird lediglich gefordert, dass die Möglichkeit existiert, jede Fläche als Dreieck in der euklidischen Ebene aufzufalten. \\  
+Die Triangulierung einer Stf-Oberfläche ist für gewöhnlich eine Sammlung von ebenen Dreiecken im Raum (siehe Abbildung~\ref{fig:hase}). Dies ist jedoch keine Anforderung an die Triangulierung, es wird lediglich gefordert, dass die Möglichkeit existiert, jede Fläche als Dreieck in der euklidischen Ebene aufzufalten. \\  
 
 Auf $M$ sind also auch sogenannte irreguläre Dreiecke erlaubt, bei denen (zum Beispiel) ein Knoten eine (irreguläre) Kante zu sich selbst hat und die anderen beiden Kanten gleich sind oder alle drei Knoten identisch sind (siehe Abb. \ref{fig:auffaltung_irregulaer}).
-Formal ist $M$  somit ein $\Delta$-Komplex \cite[abschnitt 2.1]{hatcher:2005:deltakomplex}.\\
+Formal ist $M$  somit ein $\Delta$-Komplex~\cite[Abschnitt 2.1]{hatcher:2005:deltakomplex}.\\
  
 \begin{figure}[H]%{r}{5cm}
     \centering
   \includegraphics[width=4in]{images/auffaltung_irregulaer.png}
   %\setcapindent{0em}
-  \caption{Illustration von irregulären Dreiecken, die sich in der  euklidischen Ebene zu gewöhnliche Dreiecken auffalten \cite{Sharp:2019:NIT}}
+  \caption{Illustration von irregulären Dreiecken, die sich in der  euklidischen Ebene zu gewöhnliche Dreiecken auffalten~\cite{Sharp:2019:NIT}}
 \label{fig:auffaltung_irregulaer}
 \end{figure}
 % in der Geometrie bezieht sich intrinsische darauf, dass (zum Beispiel) Oberflächen ohne Bezug auf ihre Lage im Raum beschrieben werden, wobei nur Messungen entlang der Oberfläche (Längen, Winkel usw.) verwendet werden.\\
@@ -124,7 +124,7 @@ Die Eigenschaften sind unter anderem:
     \item die Dualität zum Voronoidiagramm (siehe Abb. \ref{fig:delaunay_voronoi}  ) \cite{indermitte:2001:voronoi,aurenhammer:2000:voronoi}
     \item die Eigenschaft der leeren Kreisscheibe (im folgenden Delaunay-Eigenschaft genannt)\\(siehe Abb. \ref{fig:delaunay_umkreis})
     \item sie ist in der Regel eindeutig (siehe Abb. \ref{fig:eindeutig})
-    \item jede beliebige Triangulierung kann mit einer endlichen Zahl an Kantenflips in eine Delaunay-Triangulierung überführt werden. Dies gilt für die euklidische Ebene \cite{shewchuk:1997:delaunay} und für die StF-Oberfläche \cite{Bobenko:2007:LaplaceBeltrami}.
+    \item jede beliebige Triangulierung kann mit einer endlichen Zahl an Kantenflips in eine Delaunay-Triangulierung überführt werden. Dies gilt für die euklidische Ebene~\cite{shewchuk:1997:delaunay} und für die StF-Oberfläche~\cite{Bobenko:2007:LaplaceBeltrami}.
     \item eine Kante ist genau dann Teil der Delaunay-Triangulierung,  wenn sie die Delaunay-Eigenschaft erfüllt. 
     \item unter allen möglichen Triangulierungen ist die Delaunay-Triangulierung diejenige, welche den minimalen Innenwinkel über alle Dreiecke maximiert. 
     %\item die Maximierung des minimalen Innenwinkels über alle Dreiecke. Letztere Eigenschaft verhindert in weiterer Folge Rundungsfehler.
@@ -134,7 +134,7 @@ Die Eigenschaften sind unter anderem:
  \begin{figure}[H]
     \centering
     \includegraphics[width=5in]{images/lokal_delaunay.png}
-    \caption{Illustration: dass jede Kante, Kante die geflippt werden muss geflipt werden kann. in $(a)$ erfüllt $e$ die Delaunay-Eigenschaft. in $(b)$ erfüllt $e$ sie nicht kann, aber die durch den Kantenflip erzeugt Kante erfüllt die Delaunay-eigenschaft \cite{shewchuk:1997:delaunay} }
+    \caption{Illustration: dass jede Kante, Kante die geflippt werden muss geflipt werden kann. in $(a)$ erfüllt $e$ die Delaunay-Eigenschaft. in $(b)$ erfüllt $e$ sie nicht kann, aber die durch den Kantenflip erzeugt Kante erfüllt die Delaunay-eigenschaft~\cite{shewchuk:1997:delaunay} }
     \label{fig:lokal_delaunay}
 \end{figure}
 
@@ -159,7 +159,7 @@ Die Eigenschaften sind unter anderem:
 \begin{figure}[H]
     \centering
     \includegraphics[width=2in]{images/Bildschirmfoto von 2021-11-27 22-34-40.png}
-    \caption{ Wenn mehr als drei Punkte auf dem Rand derselben Kreisscheibe liegen, ist die Delaunay Triangulierung nicht eindeutig. Da dies in der  Praxis selten vorkommt, treffen wir die vereinfachte Annahm, dass niemals mehr als drei Punkte auf einer Kreisscheibe liegen\cite{shewchuk:1997:delaunay} }
+    \caption{ Wenn mehr als drei Punkte auf dem Rand derselben Kreisscheibe liegen, ist die Delaunay Triangulierung nicht eindeutig. Da dies in der  Praxis selten vorkommt, treffen wir die vereinfachte Annahm, dass niemals mehr als drei Punkte auf einer Kreisscheibe liegen~\cite{shewchuk:1997:delaunay} }
     \label{fig:eindeutig}
 \end{figure}
     

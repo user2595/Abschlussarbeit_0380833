@@ -28,11 +28,13 @@
 	   automark,         % automatische Aktualisierung der Kolumnentitel
 	   markcase=ignoreuppercase,      % Grossbuchstaben verhindern
 	]{scrlayer-scrpage}
-
+   
 	\pagestyle{scrheadings}
 	% loescht voreingestellte Stile
-	\clearscrheadings
-	\clearscrplain
+	\clearmainofpairofpagestyles
+	\clearplainofpairofpagestyles
+	%\clearscrheadings
+	%\clearscrplain
 	% Was steht wo...
 	   \ohead{\pagemark}
 	   \ihead{\headmark}
@@ -43,7 +45,7 @@
 	%
 	% Linien (moegliche Kombination mit Breiten)
 	\setheadsepline{.4pt}[\color{black}]
-
+      
 	\setheadwidth[0pt]{text}
 	\setfootwidth[0pt]{text}
 
@@ -110,7 +112,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %  Bilder
 	\usepackage{tikz}
-    \usepackage{siunitx}
+    %\usepackage{siunitx}
     \usepackage{standalone}
  	\usetikzlibrary{positioning, calc,quotes,angles,arrows,decorations.pathmorphing,decorations.pathreplacing,quotes} 
     \usetikzlibrary{shapes,backgrounds,fit,matrix}
@@ -141,7 +143,7 @@
 
 %\cref is a powerfull command that automatically states the current environment (e.g. Theorem, Lemma, etc.)
 \usepackage[sort&compress,nameinlink,noabbrev,capitalize]{cleveref}
-\usepackage{scrextend} % super powerful tool that helps a bit with everything
+%\usepackage{scrextend} % super powerful tool that helps a bit with everything
 
 
 
