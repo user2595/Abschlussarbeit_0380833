@@ -1,5 +1,5 @@
 \chapter{ Grundlagen}
-Diese Arbeit befasst sich mit Winkeldefekten und ihren Auswirkungen auf die Terminierung des intrinsischen Delaunay-Refinement. Zum Verständnis sind Grundkenntnisse der computergestützten Geometrie und deren Begrifflichkeiten sowie allgemeine mathematische Grundbegriffe erforderlich. Im Folgenden werden daher einige der wichtigsten Grundbegriffe und Definitionen erläutert. Wir orientieren uns dabei in der
+Diese Arbeit befasst sich mit Winkeldefekten und ihren Auswirkungen auf die Terminierung des intrinsischen Delaunay-Refinements. Zum Verständnis sind Grundkenntnisse der computergestützten Geometrie und deren Begrifflichkeiten sowie allgemeine mathematische Grundbegriffe erforderlich. Im Folgenden werden daher einige der wichtigsten Grundbegriffe und Definitionen erläutert. Wir orientieren uns dabei in der
 Formulierung an den Arbeiten von 
  Bobenko, Springborn, Fisher u. a., Sharp u. a. und Shewchuk
  \cite{Bobenko:2006:SIGGRAPH,Sharp:2019:NIT,Bobenko:2007:LaplaceBeltrami,shewchuk:1997:delaunay,SHEWCHUK:2002:chuws},
@@ -22,7 +22,7 @@ Dabei bezeichnet  $V$ die Menge der Knoten, $E$ die Menge der Kanten und $T$ die
 
 
 \section*{Auffaltung}
-Die Auffaltung eines dreidimensionalen Objektes ist die Ausbreitung der Flächen seiner Oberfläche (oder Teilen davon) in der euklidischen Ebene, nachdem es an einigen Kanten aufgeschnitten worden ist. 
+Die Auffaltung eines dreidimensionalen Objektes ist die Ausbreitung seiner Oberfläche (oder Teilen davon) in der euklidischen Ebene, nachdem es an einigen Kanten aufgeschnitten worden ist. 
 
 \section*{Gesamtwinkel}
 \label{def:gesamtwinkel}
@@ -38,9 +38,7 @@ Seien $M = (V, E, T)$ eine Triangulierung, $i,j,k \in V$ und $(i, j),(i, k),(j, 
 \section*{Winkeldefekt}
 \label{def:winkeldefekt}
 In der euklidischen Ebene addieren sich die Winkel um einen Knoten zu $2\pi$. Bei einer Oberfläche können die Winkel sich zu weniger oder mehr als $2\pi$ addieren.\\
-Dieses Phänomen bezeichnet man in der Geometrie als Winkeldefekt. Für den Gesamtwinkel eines Knotens gilt dann: $\gesamtwinkel* \neq 2\pi$ 
-
-\cite{richeson:2012:euler}.\\
+Dieses Phänomen bezeichnet man in der Geometrie als Winkeldefekt. Für den Gesamtwinkel eines Knotens gilt dann: $\gesamtwinkel* \neq 2\pi$~\cite{richeson:2012:euler}.\\
 \begin{figure}[H]%{r}{5cm}
     \centering
   \includegraphics[width=4in]{images/winkeldefekt_polyder_2.png}
@@ -105,7 +103,7 @@ Formal ist $M$  somit ein $\Delta$-Komplex~\cite[Abschnitt 2.1]{hatcher:2005:del
 \begin{definition}(Eingebettete leere Kreisscheibe)\\
 Sei $M = (V,E,T)$ eine Triangulierung einer StF-Oberfläche.
 Eine eingebettete leere Kreisscheibe ist eine stetige Abbildung $\phi: k^{\ast} \rightarrow M$, wobei $k$ eine offene runde Scheibe in der euklidischen Ebene und  $k^{\ast}$ ihr Abschluss ist.
-Jeder $v \in K$ hat eine Nachbarschaft, die isometrisch abgebildet wird. Es gilt $\phi (k) \cap V = \emptyset $. Folglich sind alle Punkte in $\phi^-1(V)$ im Rand von $K$ enthalten: $\phi^{-1}(V) \subset \partial K $ 
+Jeder $v \in K$ hat eine Nachbarschaft, die isometrisch abgebildet wird. Es gilt $\phi (k) \cap V = \emptyset $. Folglich sind alle Punkte in $\phi^-1(V)$ im Rand von $K$ enthalten: $\phi^{-1}(V) \subset \partial K $. 
 \end{definition} 
  
  
@@ -134,7 +132,7 @@ Die Eigenschaften sind unter anderem:
  \begin{figure}[H]
     \centering
     \includegraphics[width=5in]{images/lokal_delaunay.png}
-    \caption{Illustration: dass jede Kante, Kante die geflippt werden muss geflipt werden kann. in $(a)$ erfüllt $e$ die Delaunay-Eigenschaft. in $(b)$ erfüllt $e$ sie nicht kann, aber die durch den Kantenflip erzeugt Kante erfüllt die Delaunay-eigenschaft~\cite{shewchuk:1997:delaunay} }
+    \caption{Illustration, dass jede Kante, die geflippt werden muss geflipt werden kann. In $(a)$ erfüllt $e$ die Delaunay-Eigenschaft. in $(b)$ erfüllt $e$ sie nicht, aber die durch den Kantenflip erzeugt Kante erfüllt die Delaunay-Eigenschaft~\cite{shewchuk:1997:delaunay} }
     \label{fig:lokal_delaunay}
 \end{figure}
 
@@ -143,7 +141,7 @@ Die Eigenschaften sind unter anderem:
     \centering
   \includesvg[width=2in]{images/Delaunay_Voronoi}
   %\setcapindent{0em}
-  \caption{ Umkreismittelpunkte der Dreiecke der Delaunay-Triangulierung sind die Knoten  der Voronoizellen.\cite{Hferee:2011:delaunay-voronoi}}
+  \caption{ Umkreismittelpunkte der Dreiecke der Delaunay-Triangulierung sind die Knoten  der Voronoizellen.~\cite{Hferee:2011:delaunay-voronoi}}
   \label{fig:delaunay_voronoi}
 \end{figure}
 
@@ -159,7 +157,7 @@ Die Eigenschaften sind unter anderem:
 \begin{figure}[H]
     \centering
     \includegraphics[width=2in]{images/Bildschirmfoto von 2021-11-27 22-34-40.png}
-    \caption{ Wenn mehr als drei Punkte auf dem Rand derselben Kreisscheibe liegen, ist die Delaunay Triangulierung nicht eindeutig. Da dies in der  Praxis selten vorkommt, treffen wir die vereinfachte Annahm, dass niemals mehr als drei Punkte auf einer Kreisscheibe liegen~\cite{shewchuk:1997:delaunay} }
+    \caption{ Wenn mehr als drei Punkte auf dem Rand derselben Kreisscheibe liegen, ist die Delaunay Triangulierung nicht eindeutig. Da dies in der  Praxis selten vorkommt, treffen wir die vereinfachte Annahm, dass niemals mehr als drei Punkte auf einer Kreisscheibe liegen.~\cite{shewchuk:1997:delaunay} }
     \label{fig:eindeutig}
 \end{figure}
     

@@ -3,14 +3,14 @@
 \section*{Fazit}
  
 In der vorliegenden Arbeit wurde gezeigt, dass das intrinsische Delaunay-Refinement für Eingaben mit Winkeldefekt kleiner als $\frac{5}{3}\pi$ terminiert.
-Diese Nebenbedingung ist äquivalent zu der Bedingung, dass der Winkel zwischen zwei Segmenten (feste Kanten) größer als $\frac{\pi}{3}$ ist, die von  \citeauthor{SHEWCHUK:2002:chuws} und~\citeauthor{ruppert:1995:delaunay} an die Eingabe Triangulierung des Delaunay-Refinements gestellt wird. 
+Diese Nebenbedingung ist äquivalent zu der Bedingung, dass der Winkel zwischen zwei Segmenten (feste Kanten) größer als $\frac{\pi}{3}$ ist, die von~\citeauthor{SHEWCHUK:2002:chuws} und~\citeauthor{ruppert:1995:delaunay} an die Eingabe Triangulierung des Delaunay-Refinements gestellt wird. 
 
  %\todo[Eingabetriangulierung zusammen oder getrennt?]
  
 %\textcolor{red}{genaue Zahlen und Quellen ggf. streichen, wenn kein Experiment Kapitel}
 Die Auswertung einer Stichprobe des ABC-Datensatzes~\cite{Koch_2019_CVPR} an 100.000 dreidimensionalen Objekten zeigte, dass die obere Schranke von  $\frac{5}{3}\pi$ in der Praxis kaum zu Komplikation führt.  Nur etwas weniger als einen Prozent der geprüften Objekte wiesen einen Winkeldefekt über der Schranke auf.
 
-Die durchgeführten Experimente lassen darüber hinaus vermuten, dass die eigentliche Obergrenze bei $ 2 \pi -  \kleinsterWinkel*$ liegt könnte.
+Die durchgeführten Experimente lassen darüber hinaus vermuten, dass die eigentliche Obergrenze bei $ 2 \pi -  \kleinsterWinkel*$ liegen könnte.
 
 
 \section*{Ausblick}
@@ -18,8 +18,8 @@ Leider bestehen noch folgende Lücken in der Betrachtung des Winkeldefekts und d
 
 \begin{itemize}
     \item die  Einschränkung des Winkeldefekts auf $ 2 \pi -  \kleinsterWinkel*$,
-    \item Umgang mit Segmenten
-    \item und Größen- und Abstufungs-Optimalität.
+    \item der Umgang mit Segmenten
+    \item und die Größen- und Abstufungs-optimalität.
 \end{itemize} 
 
  Hier gibt es noch Möglichkeiten für weiterführende Forschung.
@@ -29,14 +29,14 @@ Leider bestehen noch folgende Lücken in der Betrachtung des Winkeldefekts und d
 \subsubsection{Einschränkung Gesamtwinkel}
 In dieser Arbeit haben wir uns auf geschlossene Triangulierungen, welche nur Knoten enthalten, mit einem Winkeldefekt kleiner als $ \frac{5}{3}\pi$, beschränkt. Vermutlich lässt sich diese Winkeldefektbedingung auf  einen Winkeldefekt kleiner als $2\pi - \kleinsterWinkel*$ erweitern. 
 %Denn der Algorithmus könnte dann zwar theoretisch Dreiecke mit einer kürzeren Kante erzeugen, dieses Dreieck würde aber nicht weiter als schlecht eingestuft, wodurch der Algorithmus ebenfalls terminiert würde. 
-Die Ergebnisse einer Versuchsreihe mit den im  ABC-Datensatzes gefunden Elementen  mit einem Winkeldefekt größer als $\frac{5}{3}\pi$   unterstreichen diese Behauptung.
+Die Ergebnisse einer Versuchsreihe mit den im  ABC-Datensatzes gefundenen Elementen  mit einem Winkeldefekt größer als $\frac{5}{3}\pi$   unterstreichen diese Behauptung.
  
 
 %Im Algorithmus von \citeauthor{Sharp:2019:NIT} werden dünne Dreiecke ignoriert, die an ein Dreieck mit irregulärer Kante grenzen. Dadurch terminiert sein Algorithmus ebenfalls sicher für Triangulationen mit Gesamtwinkel kleiner  $\frac{\pi}{3}$ . 
 
-\subsubsection{Segmentbehandlung, Größen- und Abstufungs-Optimatlität}
+\subsubsection{Segmentbehandlung, Größen- und Abstufungs-optimatlität}
 Bisher wurde in dieser Arbeit nur gezeigt, dass der Algorithmus für einen maximalen Winkelschwellenwert von  $\frac{\pi}{6}$ sicher terminiert. Lemma~\ref{lem:Obergrenze} garantiert, dass nach der Terminierung alle vom Algorithmus erzeugten Kanten mindestens $\min(d_{min},g_{m})$ lang sind. Dieses Lemma garantiert jedoch lediglich, dass der Algorithmus im Worst Case nach der Terminierung eine uniformen Triangulierung erzeugt hat. Es besteht somit keine Garantie, dass die räumliche Abstufung der Dreiecke optimal ist.\\
 %\citet{ruppert:1995:delaunay} bewies dazu, dass in der Ausgangstriangulierung der Radius der Kreisscheibe eines Knotens proportional zu Länge der adjazent Kante ist. Daher werden Kantenlängen durch lokale Faktoren bestimmt und Faktoren, die außerhalb der Kreisscheibe eines Knotens, liegen beeinflussen die Länge der adjazent Kanten nur wenig. Die Größe von Dreiecken variiert schnell über kurze Entfernungen, wo eine solche Variation erwünscht ist, um die Anzahl der Dreiecke im Netz zu reduzieren. Die Größe von Dreiecken kann somit schnell über eine kurze Entfernung variieren, wo diese Variation gewünscht ist, um die Anzahl der Dreiecke in der Triangulierung zu reduzieren.
-In dieser Arbeit wird dies nicht mehr für das intrinsische Delaunay-Refinement gezeigt. Jedoch wird vermutet, dass mithilfe der hier aufgestellten Lemmata und Nebenbedingungen sich~\citeauthor{ruppert:1995:delaunay}s Beweise einfach übertragen lässt. Ähnliches gilt für den Umgang mit Segmenten. bestärkt wird diese Vermutung durch~\citet{chew:1993:guaranteed} Ergebnisse. er zeigt für seinen zweiten Algorithmus ohne Garantien für eine optimale  räumliche Abstufung, dass er bei einem Winkelschwellenwert von maximal $\frac{\pi}{6}$. terminiert.
+In dieser Arbeit wird dies nicht mehr für das intrinsische Delaunay-Refinement gezeigt. Jedoch wird vermutet, dass mithilfe der hier aufgestellten Lemmata und Nebenbedingungen sich~\citeauthor{ruppert:1995:delaunay}s Beweise einfach übertragen lässt. Ähnliches gilt für den Umgang mit Segmenten. Bestärkt wird diese Vermutung durch Chews~\cite{chew:1993:guaranteed} Ergebnisse. Er zeigt ebenfalls für seinen zweiten Algorithmus ohne Garantien für eine optimale  räumliche Abstufung, dass er bei einem Winkelschwellenwert von maximal $\frac{\pi}{6}$ terminiert.
 
  
